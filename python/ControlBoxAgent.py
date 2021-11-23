@@ -10,12 +10,10 @@ import pandas as pd
 class ControlBoxAgent(Agent):
     def __init__(self, unique_id, model,maxCarsToPass):
         super().__init__(unique_id, model)
-
         self.maxCarsToPass=maxCarsToPass
 
        
     def optimumTrafficLight(self):
-
         chosenLane =-1
         laneSums =[]
         for lane in range(self.model.cars.height):
@@ -38,19 +36,24 @@ class ControlBoxAgent(Agent):
             for i in range(len(laneSums)):
                 if chosenLane == -1 or laneSums[i] > laneSums[chosenLane]:
                     chosenLane =i
-
-        greenTime =0
-        carsToPass = laneSums[chosenLane]*.7
+        
+        #count the waiting time thats bein reduced
+        gTime =0
+        #initilize waiting reducccion that must pass 70% of the cars wating time unless there are more than maxCarsToPass
+        waitingReduction = laneSums[chosenLane]*.7
+        #ensure we dont exceed maxCarsToPass
+        carsLeftToMax= self.maxCarsToPass
         for car in self.model.cars[chosenLane]:
-            if greenTime < carsToPass:
-                greenTime+=car.getWaitingTime()
-                if greenTime>self.maxCarsToPass:
-                    break
+            if carsLeftToMax and gTime < waitingReduction:
+                gTime+=car.getWaitingTime()
+                carsLeftToMax-=1
+            else:
+                break
 
-        self.turnTrafficLightGreen(chosenLane,1,greenTime)
+        self.turnTrafficLightGreen(chosenLane,gTime)
 
        
 
     # color can be 0 for red or 1 for green
-    def turnTrafficLightGreen(self,trafficLightIndex, color,time):
-        self.model.trafficLights[trafficLightIndex].turnGreen(color,time)
+    def turnTrafficLightGreen(self,trafficLightIndex,gTime):
+        self.model.trafficLights[trafficLightIndex].turnGreen(gTime)
