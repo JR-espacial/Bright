@@ -10,12 +10,26 @@ from mesa.datacollection import DataCollector
 
 import numpy as np
 import pandas as pd
+import ControlBoxAgent
+import CarAgent
+import TrafficLightAgent
 
 
 class TrafficControlModel(Model):
-    def __init__(self,width, height,numCars,numTrafficLights):
-        self.numCars = numCars
-        self.numTrafficLights
-        self.grid = SingleGrid(width, height, True)
+    def __init__(self,numCars,numTrafficLights):
+        self.trafficLights = SingleGrid(1,numTrafficLights, False)
+        self.cars = SingleGrid(4,numCars, False)
+        self.controlBox = ControlBoxAgent()
         self.schedule = SimultaneousActivation(self)
+
+        for (_, x, y) in self.trafficLights.coord_iter():
+            a = TrafficLightAgent((x, y), self)
+            self.trafficLights.place_agent(a, (x, y))
+            self.schedule.add(a)
+
+
+        # for (_, x, y) in self.cars.coord_iter():
+        #     a = CarAgent((x, y), self)
+        #     self.cars.place_agent(a, (x, y))
+        #     self.schedule.add(a)
 
