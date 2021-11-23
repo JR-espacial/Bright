@@ -8,8 +8,11 @@ import numpy as np
 import pandas as pd
 
 class ControlBoxAgent(Agent):
-    def __init__(self, unique_id, model):
+    def __init__(self, unique_id, model,maxCarsToPass):
         super().__init__(unique_id, model)
+
+        self.maxCarsToPass=maxCarsToPass
+
        
     def optimumTrafficLight(self):
 
@@ -36,10 +39,18 @@ class ControlBoxAgent(Agent):
                 if chosenLane == -1 or laneSums[i] > laneSums[chosenLane]:
                     chosenLane =i
 
-        self.setTrafficLights(chosenLane)
+        greenTime =0
+        carsToPass = laneSums[chosenLane]*.7
+        for car in self.model.cars[chosenLane]:
+            if greenTime < carsToPass:
+                greenTime+=car.getWaitingTime()
+                if greenTime>self.maxCarsToPass:
+                    break
+
+        self.turnTrafficLightGreen(chosenLane,1,greenTime)
 
        
 
     # color can be 0 for red or 1 for green
-    def setTrafficLights(self,trafficLightIndex, color):
-        self.model.trafficLights[trafficLightIndex].setLight(color)
+    def turnTrafficLightGreen(self,trafficLightIndex, color,time):
+        self.model.trafficLights[trafficLightIndex].turnGreen(color,time)
