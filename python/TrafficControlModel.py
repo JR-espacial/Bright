@@ -28,8 +28,8 @@ class TrafficControlModel(Model):
             self.schedule.add(a)
 
 
-        for (_, x, y) in self.cars.coord_iter():
-            a = CarAgent((x, y), self)
-            self.cars.place_agent(a, (x, y))
-            self.schedule.add(a)
+        # for (_, x, y) in self.cars.coord_iter():
+        #     a = CarAgent((x, y), self)
+        #     self.cars.place_agent(a, (x, y))
+        #     self.schedule.add(a)
 
