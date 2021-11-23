@@ -16,10 +16,10 @@ import TrafficLightAgent
 
 
 class TrafficControlModel(Model):
-    def __init__(self,numCars,numTrafficLights):
+    def __init__(self,numCars,numTrafficLights,maxCarsToPass):
         self.trafficLights = SingleGrid(1,numTrafficLights, False)
-        self.cars = SingleGrid(4,numCars, False)
-        self.controlBox = ControlBoxAgent()
+        self.cars = SingleGrid(numTrafficLights,numCars, False)
+        self.controlBox = ControlBoxAgent(maxCarsToPass)
         self.schedule = SimultaneousActivation(self)
 
         for (_, x, y) in self.trafficLights.coord_iter():
