@@ -8,7 +8,7 @@ public class Car : MonoBehaviour
     bool isMoving = true;
     float acumRotation = 0.0f;
     float acumMovement = 0.0f;
-    int destination = 2;
+    int destination = 0;
     float totalRotation = 0;
     int rotationDirection = 1;
     float totalMovement = 60;
@@ -48,15 +48,23 @@ public class Car : MonoBehaviour
         if(isMoving){
             car.transform.Translate(Vector3.right * Time.deltaTime * speed, Space.Self);
             acumMovement += Mathf.Abs(Vector3.right.x * Time.deltaTime * speed);
-            // if(acumMovement >= totalMovement){
-            //     Destroy(car);
-            //     enabled = false;
-            // }
+            if(acumMovement >= totalMovement){
+                Destroy(car);
+                enabled = false;
+            }
         }
     }
 
     void rotate(){
         car.transform.Rotate(0, 10f * rotationDirection * Time.deltaTime * speed, 0, Space.World);
         acumRotation += Mathf.Abs(10f * Time.deltaTime * speed);
+    }
+
+    public void setDestination(int _destination){
+        destination = _destination;
+    }
+
+    public void setIsMoving(bool _isMoving){
+        isMoving = _isMoving;
     }
 }
