@@ -12,9 +12,12 @@ public class Car : MonoBehaviour
     float totalRotation = 0;
     int rotationDirection = 1;
     float totalMovement = 60;
-    [SerializeField] GameObject car;
+    GameObject car;
 
     private void Start() {
+        
+        car = transform.gameObject;
+
         //Angle for right rotation
         if(destination == 1){
             totalRotation = 90;
@@ -43,12 +46,12 @@ public class Car : MonoBehaviour
     void move(){
         //Moves car -1 x units at a time by speed and delta time
         if(isMoving){
-            car.transform.Translate(Vector3.left * Time.deltaTime * speed, Space.Self);
-            acumMovement += Mathf.Abs(Vector3.left.x * Time.deltaTime * speed);
-            if(acumMovement >= totalMovement){
-                Destroy(car);
-                enabled = false;
-            }
+            car.transform.Translate(Vector3.right * Time.deltaTime * speed, Space.Self);
+            acumMovement += Mathf.Abs(Vector3.right.x * Time.deltaTime * speed);
+            // if(acumMovement >= totalMovement){
+            //     Destroy(car);
+            //     enabled = false;
+            // }
         }
     }
 
