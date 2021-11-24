@@ -196,11 +196,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd3cfce0f1b0fc84187b9d428ebe42e8, type: 3}
---- !u!4 &446849600 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 911edd8a2304d074aa642bd41984f384, type: 3}
-  m_PrefabInstance: {fileID: 1077406231}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &488194057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -489,6 +484,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &933057940 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 911edd8a2304d074aa642bd41984f384, type: 3}
+  m_PrefabInstance: {fileID: 1077406231}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +525,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -565,13 +565,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0, y: -0.29272917, z: -0, w: 0.95619535}
-  m_LocalPosition: {x: 43.34, y: 9.2, z: -15.4}
+  m_LocalRotation: {x: -0, y: 0.99597013, z: -0.08968611, w: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 41.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: -34.043, z: 0}
+  m_LocalEulerAnglesHint: {x: 10.291, y: 180, z: 0}
 --- !u!1001 &1077406231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c77a14a99069da4c9741870a4cd83bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  car: {fileID: 446849600}
+  car: {fileID: 933057940}
 --- !u!4 &1928177918
 Transform:
   m_ObjectHideFlags: 0
