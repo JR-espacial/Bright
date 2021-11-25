@@ -597,7 +597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108c3b459d6715a45b3ad399579594ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myPrefab: {fileID: 919132149155446097, guid: c841af734007cc447b56b800ca44f372, type: 3}
+  myPrefab: {fileID: 919132149155446097, guid: a349bdc7f3c0e2640942496b875bc464, type: 3}
 --- !u!4 &1928177918
 Transform:
   m_ObjectHideFlags: 0
@@ -624,4 +624,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c77a14a99069da4c9741870a4cd83bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  car: {fileID: 919132149155446097, guid: c841af734007cc447b56b800ca44f372, type: 3}
