@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: tire
+  m_Shader: {fileID: -6465566751694194690, guid: cc5f1c5e50e38a74da3ccda29612cfc4, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _SampleTexture2D_50bed181204c4e9aa3cf001d58cba727_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 372f44ce154f8124eb9b05610c5cd683, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_80cf34bb2db24757b2f0d9da978d4ae9_Texture_1:
+        m_Texture: {fileID: 2800000, guid: dfa8622881cd79a44b1a28a16e29b5e1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_986fafac23d64ba3966513097c9497d9_Texture_1:
+        m_Texture: {fileID: 2800000, guid: a3f577ee95ccc1447a46cd9d3312fa08, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_9c356eb85869488b87ed883edb8bbfb8_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 7923688059b0dd14c878b440ccf5ca9b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_c1defd16cf2a45b19f1918d52f9008b9: 2
+    - Vector1_e96cd163b78b4ea0a4fceee728070cf4: 0
+    m_Colors:
+    - Color_fe7e5dbf1c864f73b9205f4acc9f7529: {r: 0.25882348, g: 0.25882348, b: 0.26274508, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &5202231202277703106
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 4
