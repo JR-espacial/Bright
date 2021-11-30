@@ -13,13 +13,13 @@ class ControlBoxAgent(Agent):
     def optimumTrafficLight(self):
         chosenLane =-1
         laneSums =[]
-        for lane in range(self.model.cars.height):
+        for lane in range(self.model.cars.width):
             laneSum =0.0
-            for car in range (self.model.cars.width):
-                content = self.model.cars.get_cell_list_contents((car,lane))
+            for car in range (self.model.cars.height):
+                content = self.model.cars.get_cell_list_contents((lane,car))
                 #if the cell has a car
                 if content:
-                    waitingTime =content[0].getWaitingTime()
+                    waitingTime = content[0].getWaitingTime()
                     laneSum += waitingTime
                     #if the car has exeded waiting limit turn the lane light green
                     if waitingTime >= content[0].waitingLimit:
@@ -57,4 +57,5 @@ class ControlBoxAgent(Agent):
     def turnTrafficLightGreen(self,trafficLightIndex,gTime):
         content = self.model.trafficLights.get_cell_list_contents((0, trafficLightIndex))
         content[0].turnGreen(gTime)
-        
+        self.model.greenLight = trafficLightIndex
+        self.model.gTime = gTime

@@ -19,18 +19,27 @@ class CarAgent(Agent):
         return waitingTime
 
     def step(self):
-        new_position = (self.pos[0]+1, self.pos[1])
-        neighbour = self.model.cars.get_cell_list_contents(new_position)
+        new_position = (self.pos[0], self.pos[1]+1)
+
+        if self.pos[1]+1 >= self.model.cars.height:
+            neighbour = []
+        else:
+            neighbour = self.model.cars.get_cell_list_contents(new_position)
+
+        trafficLight = self.model.trafficLights.get_cell_list_contents((0,self.lane))
 
         #Check trafficLight color if the car is at the middle of the street
         #Check if there is another car in front
-        if (self.pos == self.model.cars.width/2 and self.model.trafficLights[self.lane].light == False) or len(neighbour) > 0:
+        if (self.pos[1]+2 == self.model.cars.height and trafficLight[0].lightColor == False) or len(neighbour) > 0:
             if self.isMoving:
                 self.startWaiting = time.time()
                 self.isMoving = False
         
-        elif neighbour == 0:
-            if self.pos[0]+1 == self.model.cars.width:
-                self.self.model.cars.remove_agent(self.pos,self)
+        elif not neighbour:
+            if self.pos[1]+1 == self.model.cars.height:
+                # self.model.schedule.remove(self)
+                # self.model.cars.remove_agent(self)
+                pass
+                
             else:
                 self.model.cars.move_agent(self, new_position)

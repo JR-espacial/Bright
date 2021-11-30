@@ -14,6 +14,7 @@ from control_box_agent import ControlBoxAgent
 from car_agent import CarAgent
 from traffic_light_agent import TrafficLightAgent
 import random
+import time
 
 def get_grid(model):
     grid = np.zeros( (model.cars.width, model.cars.height) )
@@ -34,6 +35,9 @@ class TrafficControlModel(Model):
         self.schedule = SimultaneousActivation(self)
         self.lastCar = 0
         self.waitingLimit = waitingLimit
+        self.greenLight = -1
+        self.startGreen = 0
+        self.gTime = 0
 
         for (_, x, y) in self.trafficLights.coord_iter():
             a = TrafficLightAgent((x, y), self)
@@ -50,13 +54,12 @@ class TrafficControlModel(Model):
         content = self.cars.get_cell_list_contents((randomLane, 0))
         if not content:
             self.cars.place_agent(a, (randomLane, 0))
+            self.schedule.add(a)
             self.lastCar+=1
-        isGreen = False
-        for i in range (self.trafficLights.height):
-            cell = self.trafficLights.get_cell_list_contents((0, i))
-            if cell and cell[0].lightColor == 1:
-                isGreen = True
-        if not isGreen:
+        
+        if self.greenLight == -1 or time.time()- self.startGreen > self.gTime:
+            cell = self.trafficLights.get_cell_list_contents((0, self.greenLight))
+            cell[0].turnRed()
             self.controlBox.optimumTrafficLight()
 
         self.datacollector.collect(self)
