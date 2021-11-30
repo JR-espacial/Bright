@@ -25,15 +25,15 @@ class ControlBoxAgent(Agent):
                     if waitingTime >= content[0].waitingLimit:
                         chosenLane = lane
                         break
+            
             laneSums.append(laneSum)
         
-
+        
         #if no car has exeded waiting limit turn the lane with the max sum light green
         if chosenLane == -1:
             for i in range(len(laneSums)):
                 if chosenLane == -1 or laneSums[i] > laneSums[chosenLane]:
                     chosenLane =i
-        
         #count the waiting time thats bein reduced
         gTime =0
         #initilize waiting reducccion that must pass 70% of the cars wating time unless there are more than maxCarsToPass
@@ -43,7 +43,7 @@ class ControlBoxAgent(Agent):
 
         for (_, x, y) in self.model.cars.coord_iter():
             content = self.model.cars.get_cell_list_contents((x, y))
-            if content and y == chosenLane and carsLeftToMax and gTime < waitingReduction:
+            if content and x == chosenLane and carsLeftToMax and gTime < waitingReduction:
                 gTime+=content[0].getWaitingTime()
                 carsLeftToMax-=1
             else:

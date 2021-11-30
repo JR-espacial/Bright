@@ -15,8 +15,10 @@ class CarAgent(Agent):
         self.lane = lane
 
     def getWaitingTime(self):
-        waitingTime = time.time() - self.startWaiting
-        return waitingTime
+        if self.isMoving:
+            return 0
+        else:
+            return time.time() - self.startWaiting
 
     def step(self):
         new_position = (self.pos[0], self.pos[1]+1)
@@ -30,16 +32,14 @@ class CarAgent(Agent):
 
         #Check trafficLight color if the car is at the middle of the street
         #Check if there is another car in front
-        if (self.pos[1]+2 == self.model.cars.height and trafficLight[0].lightColor == False) or len(neighbour) > 0:
+        if (self.pos[1]+1 == self.model.cars.height and trafficLight[0].lightColor == False) or len(neighbour) > 0:
             if self.isMoving:
                 self.startWaiting = time.time()
                 self.isMoving = False
         
         elif not neighbour:
+            self.isMoving = True
             if self.pos[1]+1 == self.model.cars.height:
-                # self.model.schedule.remove(self)
-                # self.model.cars.remove_agent(self)
-                pass
-                
+                self.model.carsToRemove.append(self)
             else:
                 self.model.cars.move_agent(self, new_position)
