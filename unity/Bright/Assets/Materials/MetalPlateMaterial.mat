@@ -1,0 +1,179 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3914166618489245043
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 4
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MetalPlateMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 93a7e54fd4ff0834193bd10f69c1cb51, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_18ea06bdd2c841dab15d55c7af32ed85:
+        m_Texture: {fileID: 2800000, guid: 71dff160e6cb2d04f8df056fe6210566, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_c78416fd406f40fab49b7829610de08a:
+        m_Texture: {fileID: 2800000, guid: 887e7d37369cbba4d9134c217b697139, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_f25f19fe198141b3a516961b2c15dc01:
+        m_Texture: {fileID: 2800000, guid: 5e97c1a4a5d385648a7b41f24ac616e4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_1f749c3745b74da3af9e6582a43351dc_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 42ea9009d7791e745885263509e321c6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_77e4ea3c932349f4abfadc50699056d0_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 2ca0edcc94bad7b4e8508d96a7cac0d4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_f152c256e81444ca9030572e1a6e0edb_Texture_1:
+        m_Texture: {fileID: 2800000, guid: d3eb9c30cbd731f4abe46b219418de81, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _baseColorTexture:
+        m_Texture: {fileID: 2800000, guid: b694f3a333097d945af6745f33f61c74, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Boolean_7371254e85ff4aee9be79946f1a53c7c: 0
+    - Vector1_0f83c5d9f23346b6977d0d49f7f8bdd4: 2.62
+    - Vector1_217a5bf0289443a99e6360c2eedc2a7d: 1
+    - Vector1_28a21719cf0547869b680e19450f6298: 0.1
+    - Vector1_4a2b9c02195f45498947957f5f39d043: 1
+    - Vector1_5332f00da7524aa5a4a56b958edfceb4: 1
+    - Vector1_5bc5cb6b024c44fdb336f722cfd36e0c: 1
+    - Vector1_95f12263fde54a658334400b4be97527: 0
+    - Vector1_be6d4e7d7fc14dc1b0d08b32b24a1d23: 2.86
+    - _AlphaClip: 0
+    - _Blend: 0
+    - _BumpScale: 1
+    - _ClearCoatMask: 0
+    - _ClearCoatSmoothness: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DetailAlbedoMapScale: 1
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EnvironmentReflections: 1
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
+    - _Metallic: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.005
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _Smoothness: 0.5
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _Surface: 0
+    - _WorkflowMode: 1
+    - _ZWrite: 1
+    - _greenIntensity: 0
+    - _greenOn: 1
+    - _hasMetallicTexture: 0
+    - _redOn: 1
+    - _yellowIntensity: 0
+    - _yellowOn: 1
+    m_Colors:
+    - Color_30530c3b3bd8452a8c6c6dc2bf24cfaa: {r: 0, g: 1, b: 0, a: 0}
+    - Color_a45236d037ba4021944d8fc948a9e208: {r: 0.01886791, g: 0.01886791, b: 0.01886791, a: 0}
+    - Color_acfc413ba0274d4882b48033b395d81f: {r: 1, g: 0, b: 0, a: 0}
+    - Color_aed8941e1c4e479099d4679d3071294a: {r: 1, g: 0.8347442, b: 0, a: 0}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _baseColor: {r: 1, g: 1, b: 1, a: 0}
+    - _emmisiveColor: {r: 1, g: 0, b: 0, a: 0}
+    - _greenEmmisive: {r: 0, g: 1, b: 0, a: 0}
+    - _greenEmmisiveColor: {r: 0, g: 0, b: 0, a: 0}
+    - _redEmmisive: {r: 1, g: 0, b: 0, a: 0}
+    - _redEmmisiveColor: {r: 0, g: 0, b: 0, a: 0}
+    - _trafficLightColor: {r: 1, g: 1, b: 1, a: 0}
+    - _yellowEmmisive: {r: 1, g: 0.8347442, b: 0, a: 0}
+    - _yellowEmmisiveColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

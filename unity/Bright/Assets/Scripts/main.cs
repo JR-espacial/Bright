@@ -8,6 +8,7 @@ public class main : MonoBehaviour
     Vector3[] carPositions = {new Vector3(30, 2.5f, 2), new Vector3(-30, 2.5f, -2), new Vector3(-2, 2.5f, 28), new Vector3(2, 2.5f, -28)};
     Vector3[] carRotation = {new Vector3(0, 180, 0), new Vector3(0, 0, 0), new Vector3(0, 90, 0), new Vector3(0, -90, 0)};
     List<List<GameObject>> cars = new List<List<GameObject>>();
+    public TrafficLight[] trafficLights = new TrafficLight[4];
 
     private void Start() {
         for (int i = 0; i < carPositions.Length; i++)
@@ -20,11 +21,15 @@ public class main : MonoBehaviour
         newCar(1, 2);
         newCar(2, 1);
         newCar(3, 0);
+
+        trafficLights[0].turnGreenOn();
     }
     void Update()
     {   
         //to stop car movement
         //cars[0][0].GetComponent<Car>().setIsMoving(false);
+        trafficLights[0].turnYellowOn();
+        trafficLights[0].turnRedOn();
     }
 
     void newCar(int lane, int destination){
