@@ -59,7 +59,7 @@ class TrafficControlModel(Model):
             self.carsToRemove = []
 
         if self.slowCars == 0:
-            self.slowCars = 5
+            self.slowCars = 2
 
             destination = random.randint(0, 2)
             randomLane = random.randint(0, 3)

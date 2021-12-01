@@ -9,10 +9,6 @@ class TrafficLightAgent(Agent):
     def turnGreen(self, gTime: float):
         self.lightColor = True
         self.model.startGreen = time.time()
-        # start = time.time()
-        # while time.time()- start < gTime:
-        #     pass
-        # self.lightColor = False
     
     def getLight(self):
         return self.lightColor
