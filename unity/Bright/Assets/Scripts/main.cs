@@ -7,7 +7,7 @@ using System.IO;
 public class main : MonoBehaviour
 {
     public GameObject myPrefab;
-    Vector3[] carPositions = {new Vector3(30, 2.5f, 2), new Vector3(-30, 2.5f, -2), new Vector3(-2, 2.5f, 28), new Vector3(2, 2.5f, -28)};
+    Vector3[] carPositions = {new Vector3(30, 1f, 2), new Vector3(-30, 1f, -2), new Vector3(-2, 1f, 28), new Vector3(2, 1f, -28)};
     Vector3[] carRotation = {new Vector3(0, 180, 0), new Vector3(0, 0, 0), new Vector3(0, 90, 0), new Vector3(0, -90, 0)};
     List<List<GameObject>> cars = new List<List<GameObject>>();
     public TrafficLight[] trafficLights = new TrafficLight[4];
@@ -40,6 +40,7 @@ public class main : MonoBehaviour
     {
         public List<CarJSON> cars;
     }
+    Dictionary<int, Car> carsUI = new Dictionary<int, Car>();  
 
 
 
@@ -49,13 +50,22 @@ public class main : MonoBehaviour
             List<GameObject> temp = new List<GameObject>();
             cars.Add(temp);
         }
+        string jsonString = File.ReadAllText("Assets/Scripts/test.json");
 
-        newCar(0, 0);
-        newCar(1, 2);
-        newCar(2, 1);
-        newCar(3, 0);
+        Cars test2 = JsonUtility.FromJson<Cars>(jsonString);
 
-        string jsonString = File.ReadAllText("./test.json");
+        foreach (CarJSON car in test2.cars)
+        {
+            if(carsUI.ContainsKey(car.id)){
+                carsUI[car.id].setIsMoving(car.isMoving);
+                
+            }
+            else{
+                newCar(car.lane,car.destiny);
+            }
+        }
+
+       
 
         // using (WebClient wc = new WebClient()){
         //     var json = wc.DownloadString("https://bright-agentes.us-south.cf.appdomain.cloud/");
@@ -64,8 +74,8 @@ public class main : MonoBehaviour
         //     print(data.green);  
         // }
 
-        Cars test2 = JsonUtility.FromJson<Cars>(jsonString);
-        print(test2.cars[0].lane);
+       
+        // print(test2.cars[0].lane);
 
         
         
@@ -75,8 +85,8 @@ public class main : MonoBehaviour
     {   
         //to stop car movement
         //cars[0][0].GetComponent<Car>().setIsMoving(false);
-        trafficLights[0].turnYellowOn();
-        trafficLights[0].turnRedOn(); 
+        trafficLights[0].turnGreenOn();
+        // trafficLights[0].turnRedOn(); 
     }
 
     void newCar(int lane, int destination){

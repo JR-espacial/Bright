@@ -5,6 +5,11 @@
         "destiny": 2, 
         "lane": 1,
         "isMoving": true
+    },{
+        "id": 1,
+        "destiny": 1, 
+        "lane": 2,
+        "isMoving": true
     }], 
     "trafficLights": 
     [   {
