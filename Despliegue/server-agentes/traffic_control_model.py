@@ -82,7 +82,8 @@ class TrafficControlModel(Model):
 
         
     def step(self):
-
+        if self.lastCar!=0: 
+            self.generateJson()
         for car in self.carsToRemove:
             self.removeCar(car)
             self.carsToRemove = []
@@ -106,6 +107,6 @@ class TrafficControlModel(Model):
                 self.controlBox.optimumTrafficLight()
 
         self.slowCars -=1
-        self.generateJson()
+        
         self.datacollector.collect(self)
         self.schedule.step()
