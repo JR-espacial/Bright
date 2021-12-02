@@ -48,18 +48,18 @@ currentJson = model.json[:len(model.json)-2] + "}]}"
 def root():
     return currentJson
 
-app.run(host='0.0.0.0', port=port, debug=True)
+# app.run(host='0.0.0.0', port=port, debug=True)
 
-# all_grid = model.datacollector.get_model_vars_dataframe()
-# # Graficamos la información usando `matplotlib`
-# fig, axs = plt.subplots(figsize=(7,7))
-# axs.set_xticks([])
-# axs.set_yticks([])
-# patch = plt.imshow(all_grid.iloc[0][0], cmap=plt.cm.binary)
+all_grid = model.datacollector.get_model_vars_dataframe()
+# Graficamos la información usando `matplotlib`
+fig, axs = plt.subplots(figsize=(7,7))
+axs.set_xticks([])
+axs.set_yticks([])
+patch = plt.imshow(all_grid.iloc[0][0], cmap=plt.cm.binary)
 
-# def animate(i):
-#     patch.set_data(all_grid.iloc[i][0])
+def animate(i):
+    patch.set_data(all_grid.iloc[i][0])
 
-# anim = animation.FuncAnimation(fig, animate, frames=frames)
-# plt.show()
+anim = animation.FuncAnimation(fig, animate, frames=frames)
+plt.show()
 

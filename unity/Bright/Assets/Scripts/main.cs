@@ -10,7 +10,7 @@ public class main : MonoBehaviour
     Vector3[] carPositions = {new Vector3(30, 1f, 2), new Vector3(-30, 1f, -2), new Vector3(-2, 1f, 28), new Vector3(2, 1f, -28)};
     Vector3[] carRotation = {new Vector3(0, 180, 0), new Vector3(0, 0, 0), new Vector3(0, 90, 0), new Vector3(0, -90, 0)};
     List<List<GameObject>> cars = new List<List<GameObject>>();
-    public TrafficLight[] trafficLights = new TrafficLight[4];
+    public TrafficLight[] trafficLightsUI = new TrafficLight[4];
 
     [System.Serializable]
     public class TrafficLightJSON{
@@ -35,12 +35,21 @@ public class main : MonoBehaviour
         }
     }
 
+    
     [System.Serializable]
-    public class Cars
+    public class Step
     {
         public List<CarJSON> cars;
+        public List<TrafficLightJSON> trafficLights;
     }
-    Dictionary<int, Car> carsUI = new Dictionary<int, Car>();  
+    [System.Serializable]
+    public class Values
+    {
+        public List<Step> values;
+    }
+    Dictionary<int, GameObject> carsUI = new Dictionary<int, GameObject>(); 
+
+    Values steps; 
 
 
 
@@ -50,51 +59,80 @@ public class main : MonoBehaviour
             List<GameObject> temp = new List<GameObject>();
             cars.Add(temp);
         }
-        string jsonString = File.ReadAllText("Assets/Scripts/test.json");
+        
 
-        Cars test2 = JsonUtility.FromJson<Cars>(jsonString);
+    
+        using (WebClient wc = new WebClient()){
+            var json = wc.DownloadString("https://bright-agentes.us-south.cf.appdomain.cloud/");
+            steps = JsonUtility.FromJson<Values>(json);
 
-        foreach (CarJSON car in test2.cars)
-        {
-            if(carsUI.ContainsKey(car.id)){
-                carsUI[car.id].setIsMoving(car.isMoving);
-                
-            }
-            else{
-                newCar(car.lane,car.destiny);
+            foreach (Step step in steps.values)
+            {
+                // foreach (CarJSON car in step.cars)
+                // {
+                //     print(car.id);
+                //     print(car.lane);
+                // }
+
+                foreach (TrafficLightJSON trafficLight in step.trafficLights)
+                {
+                    print(trafficLight.id);
+                    print(trafficLight.green);
+                }
             }
         }
 
-       
-
-        // using (WebClient wc = new WebClient()){
-        //     var json = wc.DownloadString("https://bright-agentes.us-south.cf.appdomain.cloud/");
-        //     string subJson = json.Substring(1, json.Length-3);
-        //     TrafficLightJSON data = JsonUtility.FromJson<TrafficLightJSON>(subJson);
-        //     print(data.green);  
-        // }
-
-       
-        // print(test2.cars[0].lane);
-
-        
-        
     }
+
+    int update=0;
+
+    float stepSeconds =.20f;
+
+    float waiting=0;
     
     void Update()
     {   
-        //to stop car movement
-        //cars[0][0].GetComponent<Car>().setIsMoving(false);
-        trafficLights[0].turnGreenOn();
-        // trafficLights[0].turnRedOn(); 
+        waiting+= Time.deltaTime;
+        if(waiting >= stepSeconds){
+            waiting=0;
+
+            Step currStep= steps.values[update];
+        
+            foreach (CarJSON car in currStep.cars)
+            {
+                if(carsUI.ContainsKey(car.id)){
+                    carsUI[car.id].GetComponent<Car>().setIsMoving(car.isMoving);
+                }
+                else{
+                    newCar(car.id,car.lane,car.destiny);
+                }
+            }
+            foreach (TrafficLightJSON trafficLight in currStep.trafficLights)
+            {   
+                if(trafficLight.green){
+                    trafficLightsUI[trafficLight.id].turnGreenOn();
+                }
+                else{
+                    trafficLightsUI[trafficLight.id].turnRedOn();
+                }
+            
+            }
+
+            update++;
+
+        }
+
+        
+
+
     }
 
-    void newCar(int lane, int destination){
+    void newCar(int id,int lane, int destination){
         Vector3 v = carRotation[lane];
         GameObject car = Instantiate(myPrefab, carPositions[lane], Quaternion.Euler(v.x, v.y, v.z));
         car.AddComponent<Car>();
         car.GetComponent<Car>().setDestination(destination);
-        cars[lane].Add(car);
+        carsUI.Add(id,car);
     }
 
 }
