@@ -115,8 +115,10 @@ class TrafficControlModel(Model):
                 self.controlBox.optimumTrafficLight()
 
         self.slowCars -=1
-        currentJson = self.generateJson()
-        app.run(host='0.0.0.0', port=port, debug=True)
+        if self.lastCar ==1:
+            print(self.generateJson())
+        #currentJson = self.generateJson()
+        #app.run(host='0.0.0.0', port=port, debug=True)
         
         self.datacollector.collect(self)
         self.schedule.step()

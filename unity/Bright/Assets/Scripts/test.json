@@ -1,0 +1,24 @@
+{
+    "cars": 
+    [{
+        "id": 0,
+        "destiny": 2, 
+        "lane": 1,
+        "isMoving": true
+    }], 
+    "trafficLights": 
+    [   {
+            "id": [0, 0],
+            "green": true},
+        {
+            "id": [0, 1],
+            "green": false
+        },
+        {
+            "id": [0, 2],
+            "green": false
+        },
+        {"id": [0, 3],
+        "green": false}
+    ]
+}

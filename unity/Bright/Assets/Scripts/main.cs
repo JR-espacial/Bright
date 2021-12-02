@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Net;
-
+using System.IO;
 
 public class main : MonoBehaviour
 {
@@ -13,20 +13,24 @@ public class main : MonoBehaviour
     public TrafficLight[] trafficLights = new TrafficLight[4];
 
     [System.Serializable]
-    public class TrafficLight{
-        public string message;
-        public TrafficLight(string green_){
-            message = green_;
+    public class TrafficLightJSON{
+        public int id;
+        public bool green;
+        public TrafficLightJSON(int id_,bool green_){
+            id = id_;
+            green = green_;
         }
     }
     [System.Serializable]
     public class CarJSON{
+        public int id;
         public int destiny;
         public int lane;
         public bool isMoving;
-        public CarJSON(int destiny_, int lane_,bool isMoving_){
-            destiny= destiny_;
-            lane=lane_;
+        public CarJSON(int id_,int destiny_, int lane_,bool isMoving_){
+            id = id_;
+            destiny = destiny_;
+            lane = lane_;
             isMoving = isMoving_;
         }
     }
@@ -51,33 +55,20 @@ public class main : MonoBehaviour
         newCar(2, 1);
         newCar(3, 0);
 
-<<<<<<< HEAD
-        trafficLights[0].turnGreenOn();
-=======
-        string test = @"{
-                            'cars':[
-                                'car':{
-                                    'denstiny':'0',
-                                    'lane':'1',
-                                    'isMoving':'0'
-                                }
-                            ]
-                        }";
+        string jsonString = File.ReadAllText("./test.json");
 
-        using (WebClient wc = new WebClient()){
-            var json = wc.DownloadString("https://bright-agentes.us-south.cf.appdomain.cloud/");
-            string subJson = json.Substring(1, json.Length-3);
-            TrafficLight data = JsonUtility.FromJson<TrafficLight>(subJson);
-            print(data.message);
+        // using (WebClient wc = new WebClient()){
+        //     var json = wc.DownloadString("https://bright-agentes.us-south.cf.appdomain.cloud/");
+        //     string subJson = json.Substring(1, json.Length-3);
+        //     TrafficLightJSON data = JsonUtility.FromJson<TrafficLightJSON>(subJson);
+        //     print(data.green);  
+        // }
 
-
-            Cars test2 = JsonUtility.FromJson<Cars>(test);
-            print(test2.cars[0].lane);
-        }
+        Cars test2 = JsonUtility.FromJson<Cars>(jsonString);
+        print(test2.cars[0].lane);
 
         
         
->>>>>>> Server
     }
     
     void Update()
@@ -85,7 +76,7 @@ public class main : MonoBehaviour
         //to stop car movement
         //cars[0][0].GetComponent<Car>().setIsMoving(false);
         trafficLights[0].turnYellowOn();
-        trafficLights[0].turnRedOn();
+        trafficLights[0].turnRedOn(); 
     }
 
     void newCar(int lane, int destination){
