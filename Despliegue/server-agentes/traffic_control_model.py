@@ -8,14 +8,8 @@ from mesa.time import SimultaneousActivation
 # Haremos uso de ''DataCollector'' para obtener información de cada paso de la simulación.
 from mesa.datacollection import DataCollector
 
-from flask import Flask, render_template, request, jsonify
 import json, logging, os, atexit
 
-app = Flask(__name__, static_url_path='')
-
-# On IBM Cloud Cloud Foundry, get the port number from the environment variable PORT
-# When running this app on the local machine, default the port to 8000
-port = int(os.getenv('PORT', 8000))
 
 import numpy as np
 import pandas as pd
@@ -27,10 +21,6 @@ import time
 import json
 
 currentJson = ""
-
-@app.route('/')
-def root():
-    return currentJson
 
 def get_grid(model):
     grid = np.zeros( (model.cars.width, model.cars.height) )
@@ -56,6 +46,7 @@ class TrafficControlModel(Model):
         self.gTime = 0
         self.carsToRemove = []
         self.slowCars = 0
+        self.json = '{"values": ['
 
         for (_, x, y) in self.trafficLights.coord_iter():
             a = TrafficLightAgent((x, y), self)
@@ -87,8 +78,8 @@ class TrafficControlModel(Model):
                 dictionary = {"id":content[0].unique_id,"green":content[0].lightColor}
                 info["trafficLights"].append(dictionary)
 
+        self.json += json.dumps(info) + ","
 
-        return json.dumps(info)
         
     def step(self):
 
@@ -115,11 +106,6 @@ class TrafficControlModel(Model):
                 self.controlBox.optimumTrafficLight()
 
         self.slowCars -=1
-        if self.lastCar ==1:
-            print(self.generateJson())
-        #currentJson = self.generateJson()
-        #app.run(host='0.0.0.0', port=port, debug=True)
-        
+        self.generateJson()
         self.datacollector.collect(self)
         self.schedule.step()
-
