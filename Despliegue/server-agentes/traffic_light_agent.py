@@ -6,9 +6,8 @@ class TrafficLightAgent(Agent):
         super().__init__(unique_id, model)
         self.lightColor = False
 
-    def turnGreen(self, gTime: float):
+    def turnGreen(self):
         self.lightColor = True
-        self.model.startGreen = time.time()
     
     def getLight(self):
         return self.lightColor

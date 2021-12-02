@@ -43,7 +43,8 @@ class TrafficControlModel(Model):
         self.waitingLimit = waitingLimit
         self.greenLight = -1
         self.startGreen = 0
-        self.gTime = 0
+        self.gTime = 0.003
+        self.carsToPass=0
         self.carsToRemove = []
         self.slowCars = 0
         self.json = '{"values": ['
@@ -56,6 +57,9 @@ class TrafficControlModel(Model):
         self.datacollector = DataCollector(model_reporters={"Grid": get_grid})
     
     def removeCar(self, agent):
+        if(agent.lane == self.greenLight):
+            self.carsToPass -=1
+            #print(self.carsToPass)
         self.schedule.remove(agent)
         self.cars.remove_agent(agent)
 
@@ -85,11 +89,12 @@ class TrafficControlModel(Model):
         if self.lastCar!=0: 
             self.generateJson()
         for car in self.carsToRemove:
+            #print(len(self.carsToRemove),"carsToremove")
             self.removeCar(car)
             self.carsToRemove = []
 
         if self.slowCars == 0:
-            self.slowCars = 2
+            self.slowCars = 6
 
             destination = random.randint(0, 2)
             randomLane = random.randint(0, 3)
@@ -100,10 +105,15 @@ class TrafficControlModel(Model):
                 self.cars.place_agent(a, (randomLane, 0))
                 self.schedule.add(a)
                 self.lastCar+=1
-            
-            if self.greenLight == -1 or time.time()- self.startGreen > self.gTime:
+            if self.carsToPass <= 0:
                 cell = self.trafficLights.get_cell_list_contents((0, self.greenLight))
-                cell[0].turnRed()
+                if(cell[0].lightColor==1):
+                    self.startGreen = time.time()
+                    cell[0].turnRed()
+
+            passedTime =time.time()- self.startGreen
+            #print("passedTime",passedTime)
+            if self.greenLight == -1 or (self.carsToPass <= 0 and passedTime> self.gTime ):
                 self.controlBox.optimumTrafficLight()
 
         self.slowCars -=1

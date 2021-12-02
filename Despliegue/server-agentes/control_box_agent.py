@@ -13,18 +13,21 @@ class ControlBoxAgent(Agent):
     def optimumTrafficLight(self):
         chosenLane =-1
         laneSums =[]
+        carsWaiting =[]
         for lane in range(self.model.cars.width):
-            laneSum =0.0
+            laneSum = 0.0
+            carWaitingLane = []
             for car in range (self.model.cars.height):
                 content = self.model.cars.get_cell_list_contents((lane,car))
                 #if the cell has a car
                 if content:
                     waitingTime = content[0].getWaitingTime()
+                    carWaitingLane.insert(0,waitingTime)
                     laneSum += waitingTime
                     #if the car has exeded waiting limit turn the lane light green
                     if waitingTime >= content[0].waitingLimit:
                         chosenLane = lane
-                        break
+            carsWaiting.append(carWaitingLane)
             
             laneSums.append(laneSum)
         
@@ -34,28 +37,38 @@ class ControlBoxAgent(Agent):
             for i in range(len(laneSums)):
                 if chosenLane == -1 or laneSums[i] > laneSums[chosenLane]:
                     chosenLane =i
-        #count the waiting time thats bein reduced
-        gTime =0
         #initilize waiting reducccion that must pass 70% of the cars wating time unless there are more than maxCarsToPass
         waitingReduction = laneSums[chosenLane]*.7
+
+        #print("waitingReduction",waitingReduction)
         #ensure we dont exceed maxCarsToPass
         carsLeftToMax= self.maxCarsToPass
+        cars =0
+        acumTime=0
 
-        for (_, x, y) in self.model.cars.coord_iter():
-            content = self.model.cars.get_cell_list_contents((x, y))
-            if content and x == chosenLane and carsLeftToMax and gTime < waitingReduction:
-                gTime+=content[0].getWaitingTime()
+        #print("laneSums",laneSums)
+        #print("carsWaiting",carsWaiting)
+       
+        for waiting in carsWaiting[chosenLane]:
+            if carsLeftToMax and acumTime < waitingReduction:
+                #print("waiting",waiting)
+                acumTime += waiting
                 carsLeftToMax-=1
+                cars +=1
             else:
                 break
 
-        self.turnTrafficLightGreen(chosenLane,gTime)
+        self.model.carsToPass = cars
+
+        
+        #print("carstopass",self.model.carsToPass)
+
+        self.turnTrafficLightGreen(chosenLane)
 
        
 
     # color can be 0 for red or 1 for green
-    def turnTrafficLightGreen(self,trafficLightIndex,gTime):
+    def turnTrafficLightGreen(self,trafficLightIndex):
         content = self.model.trafficLights.get_cell_list_contents((0, trafficLightIndex))
-        content[0].turnGreen(gTime)
+        content[0].turnGreen()
         self.model.greenLight = trafficLightIndex
-        self.model.gTime = gTime
