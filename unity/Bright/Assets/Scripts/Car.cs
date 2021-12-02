@@ -33,7 +33,7 @@ public class Car : MonoBehaviour
     void Update()
     {   
         //Rotate when the car has gotten to rotation areas and the total rotation has not been reached
-        if(destination == 1 && acumMovement > 23 && acumRotation <= Mathf.Abs(totalRotation)){
+        if(destination == 1 && acumMovement > 22 && acumRotation <= Mathf.Abs(totalRotation)){
             rotate();
         }
         else if(destination == 2 && acumMovement > 27 && acumRotation <= Mathf.Abs(totalRotation)){

@@ -43,7 +43,7 @@ class TrafficControlModel(Model):
         self.waitingLimit = waitingLimit
         self.greenLight = -1
         self.startGreen = 0
-        self.gTime = 0.003
+        self.gTime = 0.005
         self.carsToPass=0
         self.carsToRemove = []
         self.slowCars = 0
@@ -79,7 +79,7 @@ class TrafficControlModel(Model):
         for trafficLights in range(self.trafficLights.height):
             content = self.trafficLights.get_cell_list_contents((0,trafficLights))
             if content:
-                dictionary = {"id":content[0].unique_id,"green":content[0].lightColor}
+                dictionary = {"id":content[0].unique_id[1],"green":content[0].lightColor}
                 info["trafficLights"].append(dictionary)
 
         self.json += json.dumps(info) + ","
@@ -94,7 +94,7 @@ class TrafficControlModel(Model):
             self.carsToRemove = []
 
         if self.slowCars == 0:
-            self.slowCars = 6
+            self.slowCars = 8
 
             destination = random.randint(0, 2)
             randomLane = random.randint(0, 3)

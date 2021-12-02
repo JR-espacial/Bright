@@ -7,7 +7,7 @@ using System.IO;
 public class main : MonoBehaviour
 {
     public GameObject myPrefab;
-    Vector3[] carPositions = {new Vector3(30, 1f, 2), new Vector3(-30, 1f, -2), new Vector3(-2, 1f, 28), new Vector3(2, 1f, -28)};
+    Vector3[] carPositions = {new Vector3(30, 0.82f, 2f), new Vector3(-30, 0.82f, -2.3f), new Vector3(-3f, 0.82f, 30), new Vector3(1.3f, 0.82f, -30)};
     Vector3[] carRotation = {new Vector3(0, 180, 0), new Vector3(0, 0, 0), new Vector3(0, 90, 0), new Vector3(0, -90, 0)};
     List<List<GameObject>> cars = new List<List<GameObject>>();
     public TrafficLight[] trafficLightsUI = new TrafficLight[4];
